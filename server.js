@@ -19,7 +19,7 @@ const io=socketio(server);
 app.use('/',express.static(path.join(__dirname,'public')));
 
 
-// Not app.listen
+// Not app.listens
 server.listen(4444,function () {
    console.log("Server started at http://localhost:4444");
 });

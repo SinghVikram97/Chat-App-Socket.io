@@ -4,11 +4,36 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="jquery-3.3.1.js"></script>
-    <script src="index.js"></script>
-    <link rel="stylesheet" href="index.css">
+    <script src="Js/jquery-3.3.1.js"></script>
+    <script src="Js/index.js"></script>
+    <link rel="stylesheet" href="Css/bootstrap.css">
+    <link rel="stylesheet" href="Css/index.css">
 </head>
 <body>
-  <h1>Hi</h1>
+<h1 class="text-center">Chat App</h1>
+
+<div class="container" id="login-container" style="margin-top: 3vh">
+    <div class="row justify-content-center">
+        <div class="col-3">
+            <input id="username" class="col form-control">
+        </div>
+        <div class="col-3">
+            <button id="login" class="btn btn-info col">LOGIN</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="chat-container">
+    <div class="row justify-content-center">
+        <div class="col-3"><input id="message" class="col form-control"></div>
+        <div class="col-3"><button id="send" class="btn btn-info col">SEND</button></div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <ul id="list">
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>
