@@ -41,6 +41,8 @@ io.on('connection',socket => {
                 let msgArr=msg.split(' ');
                 msgArr.splice(0,1);
 
+                // Socket.io creates a room by default with roomName as socketId of the user
+                // Sends to every user in room including sender
                 io.in(userNameToId[id]).emit('recMsg',{message:msgArr.join(' '),id:idToUsername[socket.id]});
 
             }
