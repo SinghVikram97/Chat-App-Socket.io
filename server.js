@@ -18,12 +18,38 @@ const io=socketio(server);
 // io object like dollar of jquery available on console
 app.use('/',express.static(path.join(__dirname,'public')));
 
+let userNameToId=[];
+let idToUsername=[];
+
 io.on('connection',socket => {
    console.log(socket.id);  // New Id on opening new tab or refresh page
 
+
+    socket.on('register',data=>{
+        userNameToId[data.username]=socket.id;
+        idToUsername[socket.id]=data.username;
+    });
+
     socket.on('sendMsg',data=>{
-       // Json data received
-        io.emit('recMsg',{message:data.message,username:data.username});
+
+        if(idToUsername[socket.id]){         // Check if user is registered
+            let msg=data.message;
+            if(msg.charAt(0)==='@'){
+                let idArr=msg.split(' ')[0];
+                let id=idArr.substring(1);
+
+                let msgArr=msg.split(' ');
+                msgArr.splice(0,1);
+
+                io.in(userNameToId[id]).emit('recMsg',{message:msgArr.join(' '),id:idToUsername[socket.id]});
+
+            }
+            else{
+                  io.emit('recMsg',{message:msg,id:idToUsername[socket.id]});
+            }
+        }
+
+
     })
 });
 
