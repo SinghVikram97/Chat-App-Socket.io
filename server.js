@@ -43,6 +43,13 @@ io.on('connection',socket => {
 
                 // Socket.io creates a room by default with roomName as socketId of the user
                 // Sends to every user in room including sender
+
+                // One shortcoming is we open a new tab and use same username so it has a different socket Id
+                // So in userNameToId[username] so it's get overwritten earlier C:ABC not C:XYX
+                // But not in idToUsername[socket.id] earlier ABC:C now another XYZ:C
+
+                // So message is sent to only new User in new Tab
+
                 io.in(userNameToId[id]).emit('recMsg',{message:msgArr.join(' '),id:idToUsername[socket.id]});
 
             }
