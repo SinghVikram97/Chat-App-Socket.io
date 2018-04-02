@@ -28,6 +28,7 @@ io.on('connection',socket => {
     socket.on('register',data=>{
         userNameToId[data.username]=socket.id;
         idToUsername[socket.id]=data.username;
+        socket.join(data.username); // Creates a room with name equal to username
     });
 
     socket.on('sendMsg',data=>{
